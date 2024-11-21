@@ -2,6 +2,5 @@ import serverlessExpress from '@vendia/serverless-express';
 
 import { app, } from './app';
 
-export const handler = serverlessExpress({
-    app: app.startServerless(),
-});
+const expressApp = app.startServerless();
+export const handler = serverlessExpress({ app: expressApp });
