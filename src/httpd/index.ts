@@ -47,7 +47,11 @@ export class Server {
         this.app.use(morgan('dev'));
 
         //* Swagger documentation
-        this.app.use('/docs', Swagger.serve, Swagger.setup(this.port));
+        this.app.get('/docs/swagger.json', (req, res) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(Swagger.swaggerSpec);
+        });
+        this.app.use('/docs', Swagger.serve, Swagger.setup());
 
         //* Routes
         this.app.use('/', this.routes);
